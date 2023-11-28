@@ -1,0 +1,10 @@
+---
+- include_tasks: install.yml
+  when: nginx_install
+
+- include_tasks: configure.yml
+  when: nginx_configure
+
+- include_tasks: start.yml
+
+- include_tasks: check.yml

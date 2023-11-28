@@ -1,0 +1,13 @@
+- name: Intall NGINX
+  ansible.builtin.apt:
+    name: nginx
+    state: present
+    update_cache: yes
+
+- name: make systemd unit
+  ansible.builtin.copy:
+    src: nginx.service
+    dest: /etc/systemd/system/nginx.service
+    owner: root
+    group: root
+    mode: '0644'

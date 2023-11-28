@@ -1,0 +1,48 @@
+- name: Remove default nginx configuration
+  file:
+    path: /etc/nginx/sites-enabled/default
+    state: absent
+
+- name: NGINX configuration
+  block:
+    - name: Copy NGINX configuration files
+      ansible.builtin.template:
+        src: nginx.conf.j2
+        dest: /etc/nginx/nginx.conf
+
+    - name: Create a directory if it does not exist
+      ansible.builtin.file:
+        path: /etc/nginx/sites-available
+        state: directory
+        mode: '0755'
+
+    - name: Create a directory if it does not exist
+      ansible.builtin.file:
+        path: /etc/nginx/sites-enabled
+        state: directory
+        mode: '0755'
+
+    - name: Copy NGINX sites configuration files
+      ansible.builtin.template:
+        src: sites.conf.j2
+        dest: /etc/nginx/sites-available/sites.conf
+
+    - name: Enable sites
+      ansible.builtin.file:
+        src: /etc/nginx/sites-available/sites.conf
+        dest: /etc/nginx/sites-enabled/sites.conf
+        state: link
+
+- name: Create a directory if it does not exist
+  ansible.builtin.file:
+    path: /var/www/html
+    state: directory
+    mode: '0755'
+
+- name: Copy index.html to /var/www/test
+  ansible.builtin.copy:
+    src: index.html
+    dest: /var/www/html/index.html
+    owner: root
+    group: root
+    mode: '0644'

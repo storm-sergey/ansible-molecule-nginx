@@ -1,0 +1,13 @@
+---
+client_body_timeout: 10s;
+client_header_timeout: 10s;
+send_timeout: 60s
+keepalive_timeout: 60s
+
+server_name1: localhost
+proxy_pass1: localhost:8080
+listen1: "server1:80"
+
+server_name2: localhost
+proxy_pass2: localhost:8081
+listen2: "server2:80"

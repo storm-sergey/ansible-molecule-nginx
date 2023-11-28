@@ -1,0 +1,10 @@
+http {    
+    include       mime.types;
+
+    send_timeout {{ send_timeout }};
+    keepalive_timeout {{ keepalive_timeout }};
+    client_body_timeout {{ client_body_timeout }}s;
+    client_header_timeout {{ client_header_timeout }};
+
+    include /etc/nginx/sites-enabled/*;
+}

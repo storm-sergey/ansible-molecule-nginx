@@ -1,0 +1,14 @@
+---
+- name: nginx_playbook
+  hosts: all
+  gather_facts: false
+  # tasks:
+  #   - name: Testing role
+  #     ansible.builtin.include_role:
+  #       name: foo.bar.my_role
+  #       tasks_from: main.yml
+  roles:
+    - role: nginx_install_and_config
+      vars:
+        nginx_deploy: true
+        nginx_configure: true

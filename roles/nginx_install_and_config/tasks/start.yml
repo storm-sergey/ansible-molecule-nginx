@@ -1,0 +1,9 @@
+- name: Reload systemd
+  ansible.builtin.command:
+    cmd: systemctl daemon-reload
+
+- name: Start and Enable NGINX
+  ansible.builtin.systemd:
+    name: nginx
+    state: started
+    enabled: yes

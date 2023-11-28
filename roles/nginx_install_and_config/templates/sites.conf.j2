@@ -1,0 +1,25 @@
+upstream backend1 {
+    server {{ backend1 }};
+}
+
+upstream backend2 {
+    server {{ backend2 }};
+}
+
+server {
+    listen       {{ server_port1 }};
+    server_name  {{ server_name1 }};
+
+    location / {
+        proxy_pass http://{{ backend1 }};
+    }
+}
+
+server {
+    listen       {{ server_port2 }};
+    server_name  {{ server_name2 }};
+
+    location / {
+        proxy_pass http://{{ backend2 }};
+    }
+}
